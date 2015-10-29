@@ -1,5 +1,5 @@
 .DS_Store
 ._.DS_Store
-_static/node_modules/
-_static/web/
+_statics/node_modules/
+_statics/web/
 npm-debug.log
