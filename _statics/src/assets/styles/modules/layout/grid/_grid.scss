@@ -1,0 +1,38 @@
+/* ---------------------------------------------------------------------
+Grid Generator
+------------------------------------------------------------------------ */
+$grid-GUTTER: 30px;
+$grid-COUNT_MAX: 12;
+
+// Desktop Only Grid
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid-col {
+    width: 100%;
+}
+
+.grid-col + .grid-col {
+    margin-top: $grid-GUTTER;
+}
+
+// Mobile Grid
+.grid_persist {
+    flex-wrap: nowrap;
+}
+
+.grid_persist .grid-col + .grid-col {
+    margin-top: 0;
+    margin-left: $grid-GUTTER;
+}
+
+/* Generate grid columns */
+@for $i from 1 through $grid-COUNT_MAX {
+
+    .grid-col_#{$i}of#{$grid-COUNT_MAX} {
+        width: calc( (100% / #{$grid-COUNT_MAX}) * #{$i});
+    }
+
+}

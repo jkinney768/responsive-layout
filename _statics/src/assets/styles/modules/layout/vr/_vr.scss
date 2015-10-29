@@ -1,0 +1,17 @@
+/* ---------------------------------------------------------------------
+ VR
+------------------------------------------------------------------------ */
+$vr-BASE_UNIT: 10px;
+$vr-COUNT_MAX: 8;
+
+.vr {
+    margin-bottom: $vr-BASE_UNIT;
+}
+
+@for $i from 2 through $vr-COUNT_MAX {
+
+    .vr_x#{$i} {
+        margin-bottom: $i * $vr-BASE_UNIT;
+    }
+
+}

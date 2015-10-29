@@ -1,0 +1,19 @@
+/* ---------------------------------------------------------------------
+ Blocks
+------------------------------------------------------------------------ */
+$blocks-GUTTER: 20px;
+$blocks-BLOCKS_COUNT_MAX: 8;
+
+/* Generate blocks */
+@for $i from 1 through $blocks-BLOCKS_COUNT_MAX {
+
+    .blocks_#{$i}up > * {
+        width: (1 / $i) * 100%;
+    }
+
+}
+
+.blocks {
+    display: flex;
+    flex-wrap: wrap;
+}
