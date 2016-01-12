@@ -1,0 +1,45 @@
+/* ----------------------------------------------------------------------------
+Modules: Layout: Grid
+---------------------------------------------------------------------------- */
+
+$grid-GUTTER: 30px;
+$grid-COUNT_MAX: 12;
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.grid-col {
+    width: 100%;
+}
+
+.grid-col + .grid-col {
+    margin-top: $grid-GUTTER;
+}
+
+/* Mobile Grid
+*
+* This extension allows you to keep grid layout in tact on all screen sizes
+* as opposed to dropping to a single column, mobile grid.
+*/
+.grid_persist {
+    flex-wrap: nowrap;
+}
+
+.grid_persist .grid-col + .grid-col {
+    margin-top: 0;
+    margin-left: $grid-GUTTER;
+}
+
+/* Generate grid columns */
+@for $i from 1 through $grid-COUNT_MAX {
+
+    $width: $i * (100% / $grid-COUNT_MAX);
+    $gutter: $grid-GUTTER / 2;
+
+    .grid-col_#{$i}of#{$grid-COUNT_MAX} {
+        width: calc(#{$width} - #{$gutter});
+    }
+
+}

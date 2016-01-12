@@ -4,16 +4,25 @@
 $blocks-GUTTER: 20px;
 $blocks-BLOCKS_COUNT_MAX: 8;
 
+.blocks {
+    display: flex;
+    flex-wrap: wrap;
+    margin: (-$blocks-GUTTER) 0 0 (-$blocks-GUTTER);
+}
+
+
+.blocks > * {
+    padding: $blocks-GUTTER 0 0 $blocks-GUTTER;
+    box-sizing: border-box;
+    width: 100%;
+}
+
 /* Generate blocks */
 @for $i from 1 through $blocks-BLOCKS_COUNT_MAX {
 
     .blocks_#{$i}up > * {
-        width: (1 / $i) * 100%;
+        width: ((1 / $i) * 100%);
     }
 
 }
 
-.blocks {
-    display: flex;
-    flex-wrap: wrap;
-}

@@ -7,9 +7,9 @@ module.exports = function(grunt) {
     //-------------------------------------------
     // Setup for template tags for directories
     //-------------------------------------------
-    dirs: {
-        src: 'src',
-        web: 'web',
+    dir: {
+        SRC: 'src',
+        WEB: 'web',
     },
 
     //--------------------------------------
@@ -22,14 +22,7 @@ module.exports = function(grunt) {
             sourceMap: true
           },
           files: {                         // Dictionary of files 
-            '<%= dirs.web %>/assets/styles/modern.css': '<%= dirs.src %>/assets/styles/modern.scss'  // 'destination': 'source' 
-          }
-        },
-
-        // Flag for Theme task
-        theme: {
-            files: {                         // Dictionary of files 
-            '<%= dirs.theme %>/assets/styles/modern.css': '<%= dirs.src %>/assets/styles/modern.scss'  // 'destination': 'source' 
+            '<%= dir.WEB %>/assets/styles/modern.css': '<%= dir.SRC %>/assets/scss/modern.scss'  // 'destination': 'source' 
           }
         }
     },
@@ -39,12 +32,8 @@ module.exports = function(grunt) {
     //--------------------------------------
     clean: {
         dist: {
-            src: ["<%= dirs.web %>/assets/**",
-                  '<%= dirs.web %>/*.html']
-        },
-
-        theme: {
-            src: ["<%= dirs.theme %>/assets/**"]
+            src: ['<%= dir.WEB %>/assets/**',
+                  '<%= dir.WEB %>/*.html']
         }
     },
 
@@ -55,22 +44,12 @@ module.exports = function(grunt) {
         dist: {
             files: [{
                 expand: true,
-                cwd: '<%= dirs.src %>',
+                cwd: '<%= dir.SRC %>',
                 src: ['assets/media/**',
                       'assets/scripts/**/*.js'],
-                dest: '<%= dirs.web %>'
+                dest: '<%= dir.WEB %>'
             }]
-        },
-
-        theme: {
-            files: [{
-                expand: true,
-                cwd: '<%= dirs.src %>',
-                src: ['assets/images/**',
-                      'assets/scripts/**/*.js'],
-                dest: '<%= dirs.theme %>'
-            }]
-        },
+        }
     },
 
     //--------------------------------------
@@ -78,9 +57,27 @@ module.exports = function(grunt) {
     //--------------------------------------
     includes: {
         build: {
-            cwd: '<%= dirs.src %>',
+            cwd: '<%= dir.SRC %>',
             src: [ '*.html'],
-            dest: '<%= dirs.web %>'
+            dest: '<%= dir.WEB %>'
+        }
+    },
+
+    postcss: {
+        options: {
+            map: true,
+            processors: [
+                require('autoprefixer')({ browsers: ['last 2 versions', 'ie 10'] })
+            ]
+        },
+        dist: {
+            files: [{
+                expand: true,
+                cwd: '<%= dir.WEB %>/assets/styles',
+                src: ['*.css'],
+                dest: '<%= dir.WEB %>/assets/styles',
+                ext: '.css'
+            }]
         }
     },
 
@@ -97,15 +94,15 @@ module.exports = function(grunt) {
             tasks: ['default']
         },
         media: {
-            files: ['<%= dirs.src %>/assets/media/**'],
+            files: ['<%= dir.SRC %>/assets/media/**'],
             tasks: ['default']
         },
         markup: {
-            files: ['<%= dirs.src %>/**/*.html'],
+            files: ['<%= dir.SRC %>/**/*.html'],
             tasks: ['includes']
         },
         styles: {
-            files: ['<%= dirs.src %>/assets/styles/**/*.scss'],
+            files: ['<%= dir.SRC %>/assets/scss/**/*.scss'],
             tasks: ['default']
         },
         scripts: {
@@ -128,12 +125,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-includes');
   grunt.loadNpmTasks('grunt-force');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-postcss');
 
 
   // Default task(s).
-  grunt.registerTask('default', ['clean:dist', 'copy:dist', 'sass:dist', 'includes']);
-
-  // Uses force:clean to allow deleting files outside of _statics directory
-  grunt.registerTask('theme', ['force:clean:theme', 'copy:theme', 'sass:theme']);
+  grunt.registerTask('default', ['clean:dist', 'copy:dist', 'sass:dist', 'includes', 'postcss']);
 
 };

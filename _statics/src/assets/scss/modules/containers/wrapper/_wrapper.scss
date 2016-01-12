@@ -1,7 +1,10 @@
 /* ---------------------------------------------------------------------
  Object: Wrapper
 ------------------------------------------------------------------------ */
-.wrapper {  
-    width: $SITE_WIDTH;
-    margin: 0 auto; 
+.wrapper {
+    margin: auto;
+    padding: 50px 20px;
+    width: 100%;
+    max-width: $SITE_WIDTH;
+    box-sizing: border-box;
 }

@@ -14,8 +14,11 @@ Grid Generator
 /* Generate grid columns */
 @for $i from 1 through $grid-COUNT_MAX {
 
+    $width: $i * (100% / $grid-COUNT_MAX);
+    $gutter: $grid-GUTTER / 2;
+
     .grid-col_#{$i}of#{$grid-COUNT_MAX}\@sm {
-        width: calc( (100% / #{$grid-COUNT_MAX}) * #{$i});
+        width: calc(#{$width} - #{$gutter});
     }
 
 }
