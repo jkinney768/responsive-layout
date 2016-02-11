@@ -2,7 +2,7 @@
 Modules: Layout: Grid
 ---------------------------------------------------------------------------- */
 
-$grid-GUTTER: 30px;
+$grid-GUTTER: 20px;
 $grid-COUNT_MAX: 12;
 
 .grid {
@@ -12,6 +12,7 @@ $grid-COUNT_MAX: 12;
 
 .grid-col {
     width: 100%;
+    min-width: 1px;
 }
 
 .grid-col + .grid-col {
