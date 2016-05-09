@@ -3,6 +3,7 @@ Modules: Layout: Grid
 ---------------------------------------------------------------------------- */
 
 $grid-GUTTER: 20px;
+$grid-GUTTER_HALF: $grid-GUTTER / 2;
 $grid-COUNT_MAX: 12;
 
 .grid {
@@ -37,10 +38,9 @@ $grid-COUNT_MAX: 12;
 @for $i from 1 through $grid-COUNT_MAX {
 
     $width: $i * (100% / $grid-COUNT_MAX);
-    $gutter: $grid-GUTTER / 2;
 
     .grid-col_#{$i}of#{$grid-COUNT_MAX} {
-        width: calc(#{$width} - #{$gutter});
+        width: calc(#{$width} - #{$grid-GUTTER_HALF});
     }
 
 }
